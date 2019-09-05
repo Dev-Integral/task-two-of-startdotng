@@ -316,29 +316,32 @@ input[type=submit]:hover{
                 
             </table>
       </center>
-            <div class="contact-container">
+             <div class="contact-container">
                   
                         <legend><h1 id="contact-header" >CONTACT FORM</h1></legend>
 
-                  <form action="#" method="POST">
+                  <form action="#" method="POST" name="form1" >
 
                         <label for="title">Title</label><br>
-                        <input name="title" type="text" placeholder="Enter Subject of Message" minlength="2" required><br>
+                        <input name="title" type="text" placeholder="Enter Subject of Message" minlength="2" required /><br>
 
                         <label for="fname">First Name</label><br>
-                        <input type="text" name="firstName" placeholder="Enter your first name" minlength="4" required><br>
+                        <input type="text" name="firstName" placeholder="Enter your first name" minlength="4" required /><br>
 
                         <label for="lname">Last Name</label><br>
-                        <input type="text" name="lastName" placeholder="Enter your last name" minlength="4" required><br>
+                        <input type="text" name="lastName" placeholder="Enter your last name" minlength="4" required /><br>
 
 
                         <label for="email">E-mail</label><br>
-                        <input type="text" name="email" placeholder="Enter your E-mail"><br>
+                        <input type="text" name="email" placeholder="Enter your E-mail" id="email" /><br>
 
                         <label for="Message">Message</label><br>
                         <textarea name="message" placeholder="Write your Message" style="height:200px" minlength="20"></textarea><br>
 
-                        <input type="submit" value="Submit" id="submit">
+                        <input type="submit" value="Submit" name="submit" onclick="ValidateEmail(document.form1.email,
+                         document.form1.lastName,
+                         document.form1.firstName
+                        )">
 
 
                   </form>
@@ -346,12 +349,42 @@ input[type=submit]:hover{
             <div class="btn-container">
                   <a href="#top" class= "btn" id= "down">To top of page</a>
             </div>
-            
-      
-            
+ 
       </main>
+
 <footer>
       <div class="footer-text"><p id="foot-note">Designed by Integral Concept | &copy; 2019 All Rights Reserved</p></div>
 <footer>
+
+
+<script>
+      onload='document.form1.email.focus()'
+
+
+      function ValidateEmail(emailField, lastNameField, firstNameField){
+            let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+            let nameFormat = /^[A-Za-z]+$/;
+
+
+            if( emailField.value.match(mailFormat) && lastNameField.value.match(nameFormat) &&
+                  firstNameField.value.match(nameFormat)
+
+                  ){
+
+                  document.email.focus();
+                  document.lastName.focus();
+                  document.firstName.focus();
+                  return true;
+            }else{
+                  alert("Snap! invalid Name or Email field");
+                  document.form1.email.focus();
+                  event.preventDefault();
+                  return false;
+            }
+      }
+
+</script>
+
 </body>
 <html>
